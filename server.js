@@ -16,4 +16,4 @@ app.get('/hello', (req, res) => res.send(`Hello ${me.name}, ${me.status}`))
 app.listen(
     PORT, 
     () => { console.log(`Listening on port ${PORT}`) }
-)
+);
