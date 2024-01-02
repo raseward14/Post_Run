@@ -1,13 +1,8 @@
 const express = require('express');
-const { Sequelize } = require('sequelize');
+// const { Sequelize } = require('sequelize');
 const routes = require('./routes')
 const app = express();
 const PORT = 3000;
-
-const sequelize = new Sequelize('database', 'username', 'password', {
-    host: 'localhost',
-    dialect: 'mysql'
-  });
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
