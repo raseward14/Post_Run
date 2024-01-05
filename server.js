@@ -1,6 +1,6 @@
 const express = require('express');
 const connection = require('./database')
-// const routes = require('./routes')
+const routes = require('./routes')
 const app = express();
 const PORT = 3000;
 
@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
     })
 })
 app.get('/hello', (req, res) => res.send(`Hello ${me.name}, ${me.status}`))
+app.use(routes);
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)

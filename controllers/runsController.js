@@ -1,4 +1,5 @@
-const db = require('');
+const connection = require('../database')
+// const { User, Run } = require('../models');
 
 module.exports = {
     create: (req, res) => {
@@ -7,8 +8,15 @@ module.exports = {
         })
     },
     findAll: (req, res) => {
+        let returnAll = "SELECT * FROM runs"
+        connection.query(returnAll, (err, results) => {
+            if(err) throw err;
+            res.json(results);
+        })
+    },
+    find: (req, res) => {
         res.json({
-            message: 'retrieved all runs!'
+            message: 'got one run by its ID!'
         })
     }
 }
