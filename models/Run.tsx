@@ -33,4 +33,4 @@ const Run = sequelize.define('Run', {
   }
 })
 
-export default Run;
+module.exports = { Run };
