@@ -11,3 +11,4 @@ Run.belongsTo(User, {
 });
 
 module.exports = { User, Run };
+export {}

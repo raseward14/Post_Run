@@ -5,7 +5,7 @@ const connection = require('./config/database')
 // const sequelize = require('./config/connection');
 const routes = require('./routes')
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -15,20 +15,20 @@ const me = {
     status: 'Your server is running!'
 }
 // mySQL connection only
-app.get('/', (req, res) => {
+app.get('/', (req: any, res: any) => {
     let sql = "SELECT * FROM runs";
-    connection.query(sql, (err, results) => {
+    connection.query(sql, (err: any, results: any) => {
         if(err) throw err;
         res.send(results);
     })
 })
-app.get('/hello', (req, res) => res.send(`Hello ${me.name}, ${me.status}`))
+app.get('/hello', (req: any, res: any) => res.send(`Hello ${me.name}, ${me.status}`))
 app.use(routes);
 
 // mySQL connection only
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
-    connection.connect((err) => {
+    connection.connect((err: any) => {
         if(err) throw err;
         console.log('Database connected')
     })

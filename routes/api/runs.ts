@@ -2,7 +2,7 @@ const router = require('express').Router();
 const runsController = require('../../controllers/runsController');
 
 // middleware to use with all requestes
-router.use((req, res, next) => {
+router.use((req: any, res: any, next: any) => {
     next();
 })
 
@@ -16,3 +16,4 @@ router.route('/:id')
     .get(runsController.find);
 
 module.exports = router;
+export {}

@@ -2,7 +2,7 @@ const connection = require('../config/database');
 const Run = require('../models/Run');
 
 module.exports = {
-    create: (req, res) => {
+    create: (req: any, res: any) => {
         try {
             console.log(req.body);
             Run.create({
@@ -20,10 +20,10 @@ module.exports = {
             })
         }
     },
-    findAll: (req, res) => {
+    findAll: (req: any, res: any) => {
         try {
             let returnAll = "SELECT * FROM runs"
-            connection.query(returnAll, (err, results) => {
+            connection.query(returnAll, (err: any, results: any) => {
                 if(err) throw err;
                 res.json(results);
             })
@@ -33,9 +33,11 @@ module.exports = {
             });
         };
     },
-    find: (req, res) => {
+    find: (req: any, res: any) => {
         res.json({
             message: 'got one run by its ID!'
         })
     }
-}
+};
+
+export {}

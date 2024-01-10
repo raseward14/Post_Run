@@ -2,10 +2,12 @@
   "name": "post_run",
   "version": "1.0.0",
   "description": "a runners blog to journal your runs, follow, like, and comment your friends runs!",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "build": "tsc",
+    "start": "nodemon server.js",
+    "develop": "concurrently -k \"tsc && nodemon dist/server.js\" \"cd client && npm run start\""
   },
   "repository": {
     "type": "git",
