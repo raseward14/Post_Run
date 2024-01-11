@@ -10,4 +10,4 @@
         "allowUnreachableCode": false
     },
     "include": ["server.ts","routes/api/*","routes/*","models/**/*","controllers/*","config/**/*"]
-}
+} 

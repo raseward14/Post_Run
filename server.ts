@@ -10,7 +10,7 @@ const PORT = 3001;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const me = {
+const me = {    
     name: 'Richard',
     status: 'Your server is running!'
 }
