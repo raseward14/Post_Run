@@ -2,7 +2,8 @@ const connection = require('../config/database');
 const Run = require('../models/Run');
 
 module.exports = {
-    create: (req: any, res: any) => {
+    // creating a run
+    create: (req: Response, res: any) => {
         try {
             console.log(req.body);
             Run.create({
@@ -20,10 +21,10 @@ module.exports = {
             })
         }
     },
-    findAll: (req: any, res: any) => {
+    // find all runs
+    findAll: (req: Response, res: any) => {
         try {
-            let returnAll = "SELECT * FROM runs"
-            connection.query(returnAll, (err: any, results: any) => {
+            connection.query("SELECT * FROM runs", (err: any, results: any) => {
                 if(err) throw err;
                 res.json(results);
             })
@@ -33,10 +34,26 @@ module.exports = {
             });
         };
     },
-    find: (req: any, res: any) => {
+    // find a run by ID
+    findRun: (req: Request, res: any) => {
         res.json({
             message: 'got one run by its ID!'
         })
+    },
+    // find all runs by user_id
+    findByUserId: (req: any, res: any) => {
+        let user_id = req.params.user_id
+        try {
+            connection.query(
+                `SELECT runs.${req.params.user_id}, runs.type, runs.distance, runs.duration, runs.date, runs.comment FROM runs INNER JOIN users ON runs.user_id=users.user_id`, (err: any, results: any) => {
+                if(err) throw err;
+                res.json(results);
+            })
+        } catch (err) {
+            res.json({
+                message: `threw this error: ${err}`
+            });
+        };
     }
 };
 
