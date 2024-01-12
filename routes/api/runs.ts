@@ -10,14 +10,11 @@ router.use((req: any, res: any, next: any) => {
 router.route('/')
     .post(runsController.create)
     .get(runsController.findAll);
+    // .get(runsController.findByUserId);
 
 // http://localhost:3001/api/runs/:id
 router.route('/:id')
     .get(runsController.findRun);
-
-// http://localhost:3001/api/runs/:user_id
-router.route('/:user_id')
-    .get(runsController.findByUserId);
 
 module.exports = router;
 export {}

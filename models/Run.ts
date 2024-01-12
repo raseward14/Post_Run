@@ -1,8 +1,8 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection')
+const sequelizeConnection = require('../config/connection')
 // https://www.digitalocean.com/community/tutorials/how-to-use-sequelize-with-node-js-and-mysql
 // runs
-const Run = sequelize.define('Run', {
+const Run = sequelizeConnection.define('Run', {
     run_id: {
         type: DataTypes.UUID,
         autoIncrement: true,

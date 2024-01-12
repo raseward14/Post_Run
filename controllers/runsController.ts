@@ -22,17 +22,31 @@ module.exports = {
         }
     },
     // find all runs
-    findAll: (req: Response, res: any) => {
+    findAll: async (req: Response, res: any) => {
         try {
-            connection.query("SELECT * FROM runs", (err: any, results: any) => {
-                if(err) throw err;
-                res.json(results);
+            const runData = await Run.findAll({
+                where: {
+                    user_id: "1"
+                    // include: [{ model: Run }]
+                }
             })
+            res.status(200).json(runData);
         } catch (err) {
-            res.json({
-                message: `threw this error: ${err}`
-            });
-        };
+            res.status(500).json(err);
+        }
+
+
+        // my sql connection only
+        // try {
+        //     connection.query("SELECT * FROM runs", (err: any, results: any) => {
+        //         if(err) throw err;
+        //         res.json(results);
+        //     })
+        // } catch (err) {
+        //     res.json({
+        //         message: `threw this error: ${err}`
+        //     });
+        // };
     },
     // find a run by ID
     findRun: (req: Request, res: any) => {
@@ -40,21 +54,21 @@ module.exports = {
             message: 'got one run by its ID!'
         })
     },
-    // find all runs by user_id
-    findByUserId: (req: any, res: any) => {
-        let user_id = req.params.user_id
-        try {
-            connection.query(
-                `SELECT runs.${req.params.user_id}, runs.type, runs.distance, runs.duration, runs.date, runs.comment FROM runs INNER JOIN users ON runs.user_id=users.user_id`, (err: any, results: any) => {
-                if(err) throw err;
-                res.json(results);
-            })
-        } catch (err) {
-            res.json({
-                message: `threw this error: ${err}`
-            });
-        };
-    }
+    // find all runs by user_id - send user_id in the req.body
+    // findByUserId: (req: any, res: any) => {
+    //     let user_id = req.body.user_id
+    //     try {
+    //         connection.query(
+    //             `SELECT runs.user_id, runs.type, runs.distance, runs.duration, runs.date, runs.comment FROM runs WHERE user_id = ${req.body.user_id}`, (err: any, results: any) => {
+    //             if(err) throw err;
+    //             res.json(results);
+    //         })
+    //     } catch (err) {
+    //         res.json({
+    //             message: `threw this error: ${err}`
+    //         });
+    //     };
+    // }
 };
 
 export {}
