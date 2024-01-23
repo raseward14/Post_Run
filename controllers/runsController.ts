@@ -22,11 +22,11 @@ module.exports = {
         }
     },
     // find all runs
-    findAll: async (req: Response, res: any) => {
+    findAll: async (req: any, res: any) => {
         try {
             const runData = await Run.findAll({
                 where: {
-                    user_id: "1"
+                    user_id: req.body.user_id
                     // include: [{ model: Run }]
                 }
             })
