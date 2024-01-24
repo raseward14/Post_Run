@@ -1,4 +1,4 @@
-const connection = require('../config/database');
+// const connection = require('../config/database');
 const Run = require('../models/Run');
 
 module.exports = {
@@ -35,7 +35,6 @@ module.exports = {
             res.status(500).json(err);
         }
 
-
         // my sql connection only
         // try {
         //     connection.query("SELECT * FROM runs", (err: any, results: any) => {
@@ -49,10 +48,18 @@ module.exports = {
         // };
     },
     // find a run by ID
-    findRun: (req: Request, res: any) => {
-        res.json({
-            message: 'got one run by its ID!'
-        })
+    findRun: async (req: any, res: any) => {
+        let id = req.params.id
+        try {
+            const singleRun = await Run.findAll({
+                where: {
+                    run_id: id
+                }
+            })
+            res.status(200).json(singleRun);
+        } catch(err) {
+            res.status(500).json(err);
+        };
     },
     // find all runs by user_id - send user_id in the req.body
     // findByUserId: (req: any, res: any) => {
